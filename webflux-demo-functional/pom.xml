@@ -4,11 +4,11 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>com.demo</groupId>
-	<artifactId>flux-demo-classic</artifactId>
+	<artifactId>webflux-demo-functional</artifactId>
 	<version>1.0-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
-	<name>flux-demo</name>
+	<name>webflux-demo-functional</name>
 	<description>Flux demo</description>
 
 	<parent>

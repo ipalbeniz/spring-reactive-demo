@@ -11,8 +11,9 @@
 	<packaging>pom</packaging>
 
 	<modules>
-		<module>flux-demo-classic</module>
-		<module>flux-demo-functional</module>
+		<module>flux-demo</module>
+		<module>webflux-demo-classic</module>
+		<module>webflux-demo-functional</module>
 	</modules>
 
 </project>
