@@ -4,7 +4,7 @@
 
 Demos de Spring 5 Reactive.
 
-## Qué trae Spring 5?
+## ¿Qué trae Spring 5?
 
 https://github.com/spring-projects/spring-framework/wiki/What%27s-New-in-the-Spring-Framework#whats-new-in-spring-framework-5x
 
@@ -82,8 +82,7 @@ public static interface Subscription {
 ``` 
 ### Project Reactor
 
-- https://projectreactor.io/
-- https://projectreactor.io/docs/core/release/reference/
+Web oficial: https://projectreactor.io/
 
 Implementación de *Reactive Streams* de Spring. Va por la versión 3; la versión 1 es del 2013.
 
@@ -93,3 +92,35 @@ En Reactor hay dos implementaciones de *Publishers* que nos facilitan la vida:
 
 La documentación de Project Reactor es muy completa:
 https://projectreactor.io/docs/core/release/reference/
+
+### Spring Data Reactive
+
+*Spring Data Kay M1* es la primera release que incluye soporte para acceso a datos de forma reactiva.
+De momento solo da soporte a MongoDB, Apache Cassandra y Redis ya que estos disponen de drivers reactivos.
+
+#### MongoDB
+
+Drive Reactive: https://mongodb.github.io/mongo-java-driver-reactivestreams/ 
+Ejemplos Spring Data: https://github.com/spring-projects/spring-data-examples/tree/master/mongodb/reactive
+
+Utiliza la interfaz *ReactiveMongoRepository* https://github.com/spring-projects/spring-data-mongodb/blob/master/spring-data-mongodb/src/main/java/org/springframework/data/mongodb/repository/ReactiveMongoRepository.java
+
+#### Cassandra 
+
+Ejemplos Spring Data: https://github.com/spring-projects/spring-data-examples/tree/master/cassandra/reactive
+
+#### Redis
+ 
+Ejemplos Spring Data: https://github.com/spring-projects/spring-data-examples/tree/master/redis/reactive
+
+#### JPA...
+
+Oracle está trabajando en un driver no bloqueante para acceder a bases de datos relacionales: https://t.co/qetXWqaJF9
+Hasta que no esté listo, no habrá una versión de Spring Data JPA totalmente reactiva
+
+### WebClient reactive
+
+*spring-webflux* incluye un cliente HTTP no bloqueante: *WebClient*
+WebClient acepta un Publisher como input y devuelve un Mono o Flux.
+ 
+Documentación: https://docs.spring.io/spring/docs/current/spring-framework-reference/web-reactive.html#webflux-client	

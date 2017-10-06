@@ -66,6 +66,20 @@ public class FluxDemo {
 	}
 
 	@Test
+	public void fluxFilter() {
+
+		Flux<Integer> flux = Flux.range(0,5)
+			.filter(integer -> integer % 2 == 0);
+
+		StepVerifier.create(flux)
+			.expectNext(0)
+			.expectNext(2)
+			.expectNext(4)
+			.expectComplete()
+			.verify();
+	}
+
+	@Test
 	public void fluxSubscribe() {
 
 		Flux.just("foo", "bar")
