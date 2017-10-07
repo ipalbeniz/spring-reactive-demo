@@ -1,6 +1,10 @@
 package com.demo;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+
 import java.util.Arrays;
+import java.util.Iterator;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -12,6 +16,15 @@ public class FluxDemo {
 	private static final Logger logger = LoggerFactory.getLogger(FluxDemo.class);
 
 	// Más ejemplos en https://www.infoq.com/articles/reactor-by-example
+
+	@Test
+	public void emptyFluxCreation() {
+
+		Flux<String> emptyFlux = Flux.empty();
+
+		StepVerifier.create(emptyFlux)
+			.verifyComplete();
+	}
 
 	@Test
 	public void simpleFluxCreation() {
@@ -43,11 +56,7 @@ public class FluxDemo {
 		Flux<Integer> flux = Flux.range(0,5);
 
 		StepVerifier.create(flux)
-			.expectNext(0)
-			.expectNext(1)
-			.expectNext(2)
-			.expectNext(3)
-			.expectNext(4)
+			.expectNext(0, 1, 2, 3, 4)
 			.expectComplete()
 			.verify();
 	}
@@ -59,8 +68,7 @@ public class FluxDemo {
 			.map(Integer::valueOf);
 
 		StepVerifier.create(flux)
-			.expectNext(1)
-			.expectNext(2)
+			.expectNext(1, 2)
 			.expectComplete()
 			.verify();
 	}
@@ -72,9 +80,60 @@ public class FluxDemo {
 			.filter(integer -> integer % 2 == 0);
 
 		StepVerifier.create(flux)
-			.expectNext(0)
-			.expectNext(2)
-			.expectNext(4)
+			.expectNext(0, 2, 4)
+			.expectComplete()
+			.verify();
+	}
+
+	@Test
+	public void fluxToIterable() {
+
+		Iterator<String> namesIterator = Flux.just("foo", "bar")
+			.toIterable()
+			.iterator();
+
+		assertEquals("foo", namesIterator.next());
+		assertEquals("bar", namesIterator.next());
+		assertFalse(namesIterator.hasNext());
+	}
+
+	@Test
+	public void fluxConcat() {
+
+		Flux<String> flux = Flux.just("A", "B")
+			.concatWith(Flux.just("C", "D"));
+
+		StepVerifier.create(flux)
+			.expectNext("A", "B", "C", "D")
+			.expectComplete()
+			.verify();
+	}
+
+	@Test
+	public void fluxZip() {
+
+		Flux<String> names = Flux.just("John", "Laura");
+		Flux<String> surnames = Flux.just("Spencer", "Manning");
+
+		Flux<String> fullNames = Flux.zip(names, surnames)
+			.map(tuple -> tuple.getT1() + ' ' + tuple.getT2());
+
+		StepVerifier.create(fullNames)
+			.expectNext("John Spencer", "Laura Manning")
+			.expectComplete()
+			.verify();
+	}
+
+	@Test
+	public void fluxZipWith() {
+
+		Flux<String> names = Flux.just("John", "Laura");
+		Flux<String> surnames = Flux.just("Spencer", "Manning");
+
+		Flux<String> fullNames = names.zipWith(surnames, (name, surname) -> name + ' ' + surname);
+
+		StepVerifier.create(fullNames)
+			.expectNext("John Spencer", "Laura Manning")
 			.expectComplete()
 			.verify();
 	}
