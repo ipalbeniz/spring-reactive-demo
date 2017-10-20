@@ -123,4 +123,11 @@ Hasta que no esté listo, no habrá una versión de Spring Data JPA totalmente r
 *spring-webflux* incluye un cliente HTTP no bloqueante: *WebClient*
 WebClient acepta un Publisher como input y devuelve un Mono o Flux.
  
-Documentación: https://docs.spring.io/spring/docs/current/spring-framework-reference/web-reactive.html#webflux-client	
+Documentación: https://docs.spring.io/spring/docs/current/spring-framework-reference/web-reactive.html#webflux-client
+
+## Referencias
+
+- Reactive Web Applications with Spring 5 by Rossen Stoyanchev: https://www.youtube.com/watch?v=rdgJ8fOxJhc&t=2219s
+- Reactive Spring Webinar by Josh Long: https://www.youtube.com/watch?v=jB-zvQnfQb8
+- Reactive Spring by Josh Long: https://www.youtube.com/watch?v=zVNIZXf4BG8
+- Reactive Programming in Java by Venkat Subramaniam https://www.youtube.com/watch?v=oTnujfacyPQ&t=2421s	

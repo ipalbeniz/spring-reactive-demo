@@ -27,8 +27,8 @@ public class MovieDataLoader {
 			new Movie("Rocky"),
 			new Movie("Wall·e"));
 
-		Flux.concat(this.movieRepository.deleteAll(),
-			this.movieRepository.saveAll(moviesToSave))
+		this.movieRepository.deleteAll()
+			.thenMany(this.movieRepository.saveAll(moviesToSave))
 			.subscribe();
 	}
 }

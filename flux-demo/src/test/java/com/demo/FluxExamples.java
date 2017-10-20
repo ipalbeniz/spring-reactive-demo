@@ -11,9 +11,9 @@ import org.slf4j.LoggerFactory;
 import reactor.core.publisher.Flux;
 import reactor.test.StepVerifier;
 
-public class FluxDemo {
+public class FluxExamples {
 
-	private static final Logger logger = LoggerFactory.getLogger(FluxDemo.class);
+	private static final Logger logger = LoggerFactory.getLogger(FluxExamples.class);
 
 	// Más ejemplos en https://www.infoq.com/articles/reactor-by-example
 
@@ -178,6 +178,16 @@ public class FluxDemo {
 	public void fluxLog() {
 
 		Flux.just("foo", "bar")
+			.log()
+			.subscribe();
+	}
+
+	@Test
+	public void fluxThenMany() {
+
+		Flux.just("foo", "bar")
+			.log()
+			.thenMany(Flux.just("lorem", "ipsum"))
 			.log()
 			.subscribe();
 	}
